@@ -30,9 +30,7 @@ public class TodoServiceImpl implements TodoService {
         Todo todo = todoRepository.findById(todosId).orElseThrow(
                 () -> new ServiceException("존재하지 않는 Todo 입니다."));
 
-        return new TodoApiResponse(todo.getId(), todo.getName(), todo.getCompleted(), todo.getCompletedAt(),
-                todo.getCreatedAt(), todo.getUpdatedAt());
-
+        return new TodoApiResponse(todo);
     }
 
     @Override
@@ -48,15 +46,36 @@ public class TodoServiceImpl implements TodoService {
 
     @Override
     @Transactional
-    public TodoPartial createTodo(Long userId, CreateTodoRequest createTodoRequest) {
+    public TodoApiResponse createTodo(Long userId, CreateTodoRequest createTodoRequest) {
 
-        todoRepository.save(Todo.builder()
+        Todo todo = Todo.builder()
                 .name(createTodoRequest.getName())
-                .completed(createTodoRequest.getCompleted())
                 .user(new User(userId))
-                .build());
+                .build();
 
-        return new TodoPartial(createTodoRequest.getName(), createTodoRequest.getCompleted());
+        todoRepository.save(todo);
+
+
+        return new TodoApiResponse(todo);
+    }
+
+    @Override
+    @Transactional
+    public TodoPartial updateTodo(Long todosId) {
+
+        Todo todo = todoRepository.findById(todosId).orElseThrow(() -> new ServiceException("존재하지 않는 Todo 입니다."));
+        todo.updateCompletedStatus();
+
+        return new TodoPartial(todo.getName(), todo.getCompleted());
+    }
+
+    @Override
+    @Transactional
+    public void deleteTodo(Long todosId) {
+
+        Todo todo = todoRepository.findById(todosId).orElseThrow(() -> new ServiceException("존재하지 않는 Todo 입니다."));
+
+        todoRepository.delete(todo);
     }
 
 }

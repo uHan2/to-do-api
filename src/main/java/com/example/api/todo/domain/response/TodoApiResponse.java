@@ -1,5 +1,6 @@
 package com.example.api.todo.domain.response;
 
+import com.example.api.todo.domain.entity.Todo;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,5 +25,14 @@ public class TodoApiResponse {
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
+
+    public TodoApiResponse(Todo todo){
+        this.id = todo.getId();
+        this.name = todo.getName();
+        this.completed = todo.getCompleted();
+        this.completedAt = todo.getCompletedAt();
+        this.createdAt = todo.getCreatedAt();
+        this.updatedAt = todo.getUpdatedAt();
+    }
 
 }

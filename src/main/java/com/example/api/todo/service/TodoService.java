@@ -11,5 +11,9 @@ public interface TodoService {
 
     List<TodoApiResponse> getTodoList(Long userId, Integer limit, Integer skip);
 
-    TodoPartial createTodo(Long userId, CreateTodoRequest createTodoRequest);
+    TodoApiResponse createTodo(Long userId, CreateTodoRequest createTodoRequest);
+
+    TodoPartial updateTodo(Long todosId);
+
+    void deleteTodo(Long todosId);
 }

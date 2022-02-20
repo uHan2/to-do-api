@@ -13,10 +13,10 @@ public enum ErrorCode implements Result{
 
 	// REQUEST, RESPONSE
 	REQUEST_ERROR("98001", "request.error.msg", "요청을 처리하던 도중에 오류가 발생했습니다"),
-	RESPONSE_ERROR("98002", "response.error.msg", "결과를 전송도중에 오류가 발생했습니다"),
+	RESPONSE_ERROR("98002", "response.error.msg", "결과를 전송 도중에 오류가 발생했습니다"),
 
 	// USER
-	USER_INFO_ERROR("80001", "request.error.msg", "요청을 처리하던 도중에 오류가 발생했습니다"),
+	USER_INFO_ERROR("80001", "user.error.msg", "회원 정보를 처리하던 도중에 오류가 발생했습니다"),
 
 	;
 	private final String code;

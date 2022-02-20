@@ -42,9 +42,9 @@ public class Todo {
     private User user;
 
     @Builder
-    public Todo(String name, Boolean completed, User user) {
+    public Todo(String name, User user) {
         this.name = name;
-        this.completed = completed;
+        this.completed = false;
         this.user = user;
     }
 

@@ -34,18 +34,29 @@ public class TodoApiApplication implements ApplicationRunner {
                 .delYn("N")
                 .build();
 
+        User user2 = User.builder()
+                .userName("testUser2")
+                .password(passwordEncoder.encode("testPw"))
+                .role("ROLE_USER") // 최초 가입시 USER 로 설정
+                .delYn("N")
+                .build();
+
         userRepository.save(user);
+        userRepository.save(user2);
 
         todoRepository.save(Todo.builder()
                 .name("testTodo1")
-                .completed(false)
                 .user(user)
                 .build());
 
         todoRepository.save(Todo.builder()
                 .name("testTodo2")
-                .completed(false)
                 .user(user)
+                .build());
+
+        todoRepository.save(Todo.builder()
+                .name("should not found")
+                .user(user2)
                 .build());
 
     }

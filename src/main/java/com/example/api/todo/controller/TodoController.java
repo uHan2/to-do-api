@@ -29,25 +29,24 @@ public class TodoController {
     public List<TodoApiResponse> getTodosList(@AuthenticationPrincipal User user,
                                               @RequestParam(required = false) Integer limit,
                                               @RequestParam(required = false) Integer skip) {
-
         return todoService.getTodoList(user.getId(), limit, skip);
     }
 
     @PostMapping("")
-    public TodoPartial createTodo(@AuthenticationPrincipal User user,
-                                  @RequestBody CreateTodoRequest createTodoRequest) {
+    public TodoApiResponse createTodo(@AuthenticationPrincipal User user,
+                                      @RequestBody CreateTodoRequest createTodoRequest) {
         return todoService.createTodo(user.getId(), createTodoRequest);
     }
-    //
-    //    @PutMapping("/{todosId}")
-    //    public TodoPartial updateTodo(@PathVariable Long todosId) {
-    //
-    //    }
-    //
-    //
-    //    @DeleteMapping("/{todosId}")
-    //    public void deleteTodo(@PathVariable Long todosId){
-    //
-    //    }
+
+    @PutMapping("/{todosId}")
+    public TodoPartial updateTodo(@PathVariable Long todosId) {
+        return todoService.updateTodo(todosId);
+    }
+
+
+    @DeleteMapping("/{todosId}")
+    public void deleteTodo(@PathVariable Long todosId) {
+        todoService.deleteTodo(todosId);
+    }
 
 }
