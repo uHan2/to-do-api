@@ -15,7 +15,12 @@ public class UserController {
 
     private final UserService userService;
 
-    // 로그인
+    /**
+     * 회원 로그인
+     *
+     * @param userSignInRequest
+     * @return
+     */
     @PostMapping("/sign-in")
     public String signIn(@RequestBody UserSignInRequest userSignInRequest) {
         return userService.signIn(userSignInRequest);

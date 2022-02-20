@@ -1,5 +1,7 @@
 package com.example;
 
+import com.example.api.todo.domain.entity.Todo;
+import com.example.api.todo.repository.TodoRepository;
 import com.example.api.user.domain.entity.User;
 import com.example.api.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class TodoApiApplication implements ApplicationRunner {
 
     private final UserRepository userRepository;
+    private final TodoRepository todoRepository;
     private final PasswordEncoder passwordEncoder;
 
 
@@ -24,12 +27,18 @@ public class TodoApiApplication implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
-        userRepository.save(User.builder()
-                .userName("test")
-                .password(passwordEncoder.encode("test"))
+        User user = User.builder()
+                .userName("testUser")
+                .password(passwordEncoder.encode("testPw"))
                 .role("ROLE_USER") // 최초 가입시 USER 로 설정
                 .delYn("N")
-                .build());
+                .build();
 
+        userRepository.save(user);
+
+        todoRepository.save(Todo.builder()
+                .name("testTodo1")
+                .user(user)
+                .build());
     }
 }

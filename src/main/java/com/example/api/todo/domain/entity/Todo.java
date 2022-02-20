@@ -1,6 +1,7 @@
 package com.example.api.todo.domain.entity;
 
 import com.example.api.user.domain.entity.User;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
 public class Todo {
 
@@ -23,7 +25,7 @@ public class Todo {
 
     private String name;
 
-    private boolean completed = false;
+    private Boolean completed = false;
 
     private LocalDateTime completedAt;
 
@@ -34,14 +36,14 @@ public class Todo {
     private LocalDateTime updatedAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "USER_ID")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @Builder
-    public Todo(String name, boolean completed, LocalDateTime completedAt) {
+    public Todo(String name, User user) {
         this.name = name;
-        this.completed = completed;
-        this.completedAt = completedAt;
+        this.completed = false;
+        this.user = user;
     }
 
     public void updateCompletedStatus() {
