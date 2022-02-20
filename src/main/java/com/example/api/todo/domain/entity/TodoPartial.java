@@ -1,4 +1,4 @@
-package com.example.todoapi.domain.entity;
+package com.example.api.todo.domain.entity;
 
 public interface TodoPartial {
 

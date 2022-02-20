@@ -1,5 +1,6 @@
-package com.example.todoapi.domain.entity;
+package com.example.api.todo.domain.entity;
 
+import com.example.api.user.domain.entity.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

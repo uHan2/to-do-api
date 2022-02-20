@@ -1,4 +1,4 @@
-package com.example.todoapi.domain.response;
+package com.example.api.todo.domain.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

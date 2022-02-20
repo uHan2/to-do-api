@@ -1,6 +1,6 @@
-package com.example.todoapi.service.impl;
+package com.example.api.todo.service.impl;
 
-import com.example.todoapi.service.TodoService;
+import com.example.api.todo.service.TodoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
