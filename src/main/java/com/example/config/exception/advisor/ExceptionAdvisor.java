@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class ExceptionAdvisor {
 
-    @ExceptionHandler(value = Exception.class)
+    @ExceptionHandler(Exception.class)
     protected ResponseEntity<ExceptionResponse> handlerDefaultException(Exception exception) {
         log.error("defaultException : ", exception);
         ExceptionResponse errorResult = ExceptionResponse.of(ErrorCode.ERROR);
@@ -24,6 +25,13 @@ public class ExceptionAdvisor {
     protected ResponseEntity<ExceptionResponse> handlerException(ServiceException exception) {
         log.debug("ServiceException : ", exception);
         ExceptionResponse errorResult = ExceptionResponse.of(ErrorCode.serviceError(exception.getMessage()));
+        return new ResponseEntity<>(errorResult, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(UsernameNotFoundException.class)
+    protected ResponseEntity<ExceptionResponse> handlerException(UsernameNotFoundException exception) {
+        log.debug("UserException : ", exception);
+        ExceptionResponse errorResult = ExceptionResponse.of(ErrorCode.userError(exception.getMessage()));
         return new ResponseEntity<>(errorResult, HttpStatus.BAD_REQUEST);
     }
 

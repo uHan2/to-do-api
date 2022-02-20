@@ -15,6 +15,9 @@ public enum ErrorCode implements Result{
 	REQUEST_ERROR("98001", "request.error.msg", "요청을 처리하던 도중에 오류가 발생했습니다"),
 	RESPONSE_ERROR("98002", "response.error.msg", "결과를 전송도중에 오류가 발생했습니다"),
 
+	// USER
+	USER_INFO_ERROR("80001", "request.error.msg", "요청을 처리하던 도중에 오류가 발생했습니다"),
+
 	;
 	private final String code;
 	private final String messageKey;
@@ -31,5 +34,12 @@ public enum ErrorCode implements Result{
 		serviceError.message = message;
 
 		return serviceError;
+	}
+
+	public static ErrorCode userError(String message) {
+		ErrorCode userInfoError = USER_INFO_ERROR;
+		userInfoError.message = message;
+
+		return userInfoError;
 	}
 }

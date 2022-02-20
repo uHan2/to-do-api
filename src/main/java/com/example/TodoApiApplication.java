@@ -38,7 +38,15 @@ public class TodoApiApplication implements ApplicationRunner {
 
         todoRepository.save(Todo.builder()
                 .name("testTodo1")
+                .completed(false)
                 .user(user)
                 .build());
+
+        todoRepository.save(Todo.builder()
+                .name("testTodo2")
+                .completed(false)
+                .user(user)
+                .build());
+
     }
 }

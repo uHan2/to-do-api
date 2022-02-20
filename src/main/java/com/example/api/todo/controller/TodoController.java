@@ -1,12 +1,15 @@
 package com.example.api.todo.controller;
 
+import com.example.api.todo.domain.entity.TodoPartial;
+import com.example.api.todo.domain.request.CreateTodoRequest;
 import com.example.api.todo.domain.response.TodoApiResponse;
 import com.example.api.todo.service.TodoService;
+import com.example.api.user.domain.entity.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.util.List;
 
 @Slf4j
@@ -23,17 +26,18 @@ public class TodoController {
     }
 
     @GetMapping("")
-    public List<TodoApiResponse> getTodosList(Principal principal,
+    public List<TodoApiResponse> getTodosList(@AuthenticationPrincipal User user,
                                               @RequestParam(required = false) Integer limit,
                                               @RequestParam(required = false) Integer skip) {
 
-        return todoService.getTodoList(principal.getName(), limit, skip);
+        return todoService.getTodoList(user.getId(), limit, skip);
     }
-    //
-    //    @PostMapping("")
-    //    public TodoPartial createTodo() {
-    //
-    //    }
+
+    @PostMapping("")
+    public TodoPartial createTodo(@AuthenticationPrincipal User user,
+                                  @RequestBody CreateTodoRequest createTodoRequest) {
+        return todoService.createTodo(user.getId(), createTodoRequest);
+    }
     //
     //    @PutMapping("/{todosId}")
     //    public TodoPartial updateTodo(@PathVariable Long todosId) {

@@ -5,8 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -29,10 +29,12 @@ public class Todo {
 
     private LocalDateTime completedAt;
 
-    @CreatedDate
+//    @CreatedDate
+    @CreationTimestamp
     private LocalDateTime createdAt;
 
-    @LastModifiedDate
+//    @LastModifiedDate
+    @UpdateTimestamp
     private LocalDateTime updatedAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -40,9 +42,9 @@ public class Todo {
     private User user;
 
     @Builder
-    public Todo(String name, User user) {
+    public Todo(String name, Boolean completed, User user) {
         this.name = name;
-        this.completed = false;
+        this.completed = completed;
         this.user = user;
     }
 

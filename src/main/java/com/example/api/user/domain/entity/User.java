@@ -33,6 +33,10 @@ public class User implements UserDetails {
 
     private String delYn;
 
+    public User(Long userId) {
+        this.id = userId;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singleton(new SimpleGrantedAuthority(role));
