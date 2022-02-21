@@ -30,7 +30,7 @@ public class TodoApiApplication implements ApplicationRunner {
     public void run(ApplicationArguments args) {
 
         User user = User.builder()
-                .userName("testUser")
+                .userName("testUser1")
                 .password(passwordEncoder.encode("testPw"))
                 .role("ROLE_USER") // 최초 가입시 USER 로 설정
                 .delYn("N")
@@ -47,17 +47,17 @@ public class TodoApiApplication implements ApplicationRunner {
         userRepository.saveAll(Arrays.asList(user, user2));
 
         Todo testTodo1 = Todo.builder()
-                .name("testTodo1")
+                .name("testTodo1 for testUser1")
                 .user(user)
                 .build();
 
         Todo testTodo2 = Todo.builder()
-                .name("testTodo2")
+                .name("testTodo2 for testUser1")
                 .user(user)
                 .build();
 
         Todo testTodo3 = Todo.builder()
-                .name("testTodo3")
+                .name("testTodo3 for testUser2")
                 .user(user2)
                 .build();
 

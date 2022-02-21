@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -18,6 +19,7 @@ public class FileServiceImpl implements FileService {
     private final FileRepository fileRepository;
 
     @Override
+    @Transactional
     public String upload(MultipartFile file) throws IOException {
         String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
         fileRepository.save(new File(fileName, file.getContentType(), file.getBytes()));
