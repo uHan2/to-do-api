@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 
 @Slf4j
 @RestControllerAdvice
@@ -33,6 +34,13 @@ public class ExceptionAdvisor {
         log.debug("UserException : ", exception);
         ExceptionResponse errorResult = ExceptionResponse.of(ErrorCode.userError(exception.getMessage()));
         return new ResponseEntity<>(errorResult, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(MaxUploadSizeExceededException.class)
+    protected ResponseEntity<ExceptionResponse> handleMaxSizeException(MaxUploadSizeExceededException exception) {
+        log.debug("FileException : ", exception);
+        ExceptionResponse errorResult = ExceptionResponse.of(ErrorCode.fileUploadSizeError(exception.getMessage()));
+        return new ResponseEntity<>(errorResult, HttpStatus.EXPECTATION_FAILED);
     }
 
 }

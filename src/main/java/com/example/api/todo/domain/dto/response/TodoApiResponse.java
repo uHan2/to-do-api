@@ -1,4 +1,4 @@
-package com.example.api.todo.domain.response;
+package com.example.api.todo.domain.dto.response;
 
 import com.example.api.todo.domain.entity.Todo;
 import lombok.AllArgsConstructor;

@@ -1,15 +1,15 @@
-package com.example.api.todo.domain.request;
+package com.example.api.todo.domain.dto.request;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
-public class SkipLimitRequest implements Pageable {
+public class LimitSkipRequest implements Pageable {
 
     private final Integer limit;
 
     private final Integer skip;
 
-    public SkipLimitRequest(int limit, int skip) {
+    public LimitSkipRequest(int limit, int skip) {
         if (limit < 1) {
             throw new IllegalArgumentException("Limit must not be less than one!");
         }
@@ -42,7 +42,7 @@ public class SkipLimitRequest implements Pageable {
 
     @Override
     public Pageable next() {
-        return new SkipLimitRequest(getPageSize(), (int) (getOffset() + getPageSize()));
+        return new LimitSkipRequest(getPageSize(), (int) (getOffset() + getPageSize()));
     }
 
     @Override
@@ -51,17 +51,17 @@ public class SkipLimitRequest implements Pageable {
     }
 
     private Pageable previous() {
-        return hasPrevious() ? new SkipLimitRequest(getPageSize(), (int) (getOffset() - getPageSize())) : this;
+        return hasPrevious() ? new LimitSkipRequest(getPageSize(), (int) (getOffset() - getPageSize())) : this;
     }
 
     @Override
     public Pageable first() {
-        return new SkipLimitRequest(getPageSize(), 0);
+        return new LimitSkipRequest(getPageSize(), 0);
     }
 
     @Override
     public Pageable withPage(int pageNumber) {
-        return new SkipLimitRequest(getPageSize(), (int) (getOffset() + getPageSize()));
+        return new LimitSkipRequest(getPageSize(), (int) (getOffset() + getPageSize()));
     }
 
     @Override

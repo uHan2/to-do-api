@@ -1,8 +1,8 @@
 package com.example.api.todo.service;
 
-import com.example.api.todo.domain.entity.TodoPartial;
-import com.example.api.todo.domain.request.CreateTodoRequest;
-import com.example.api.todo.domain.response.TodoApiResponse;
+import com.example.api.todo.domain.dto.TodoPartial;
+import com.example.api.todo.domain.dto.request.CreateTodoRequest;
+import com.example.api.todo.domain.dto.response.TodoApiResponse;
 
 import java.util.List;
 

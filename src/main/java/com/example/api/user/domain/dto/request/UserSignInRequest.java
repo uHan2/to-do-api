@@ -1,4 +1,4 @@
-package com.example.api.todo.domain.entity;
+package com.example.api.user.domain.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TodoPartial {
+public class UserSignInRequest {
 
-    private String name;
+    private String userName;
 
-    private Boolean completed;
+    private String password;
 
 }

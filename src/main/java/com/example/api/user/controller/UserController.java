@@ -1,6 +1,6 @@
 package com.example.api.user.controller;
 
-import com.example.api.user.domain.request.UserSignInRequest;
+import com.example.api.user.domain.dto.request.UserSignInRequest;
 import com.example.api.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;

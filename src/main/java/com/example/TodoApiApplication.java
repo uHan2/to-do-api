@@ -11,6 +11,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.Arrays;
+
 @SpringBootApplication
 @RequiredArgsConstructor
 public class TodoApiApplication implements ApplicationRunner {
@@ -25,7 +27,7 @@ public class TodoApiApplication implements ApplicationRunner {
     }
 
     @Override
-    public void run(ApplicationArguments args) throws Exception {
+    public void run(ApplicationArguments args) {
 
         User user = User.builder()
                 .userName("testUser")
@@ -41,23 +43,24 @@ public class TodoApiApplication implements ApplicationRunner {
                 .delYn("N")
                 .build();
 
-        userRepository.save(user);
-        userRepository.save(user2);
 
-        todoRepository.save(Todo.builder()
+        userRepository.saveAll(Arrays.asList(user, user2));
+
+        Todo testTodo1 = Todo.builder()
                 .name("testTodo1")
                 .user(user)
-                .build());
+                .build();
 
-        todoRepository.save(Todo.builder()
+        Todo testTodo2 = Todo.builder()
                 .name("testTodo2")
                 .user(user)
-                .build());
+                .build();
 
-        todoRepository.save(Todo.builder()
-                .name("should not found")
+        Todo testTodo3 = Todo.builder()
+                .name("testTodo3")
                 .user(user2)
-                .build());
+                .build();
 
+        todoRepository.saveAll(Arrays.asList(testTodo1, testTodo2, testTodo3));
     }
 }

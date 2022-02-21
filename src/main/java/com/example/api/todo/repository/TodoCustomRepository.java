@@ -1,6 +1,6 @@
 package com.example.api.todo.repository;
 
-import com.example.api.todo.domain.response.TodoApiResponse;
+import com.example.api.todo.domain.dto.response.TodoApiResponse;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;

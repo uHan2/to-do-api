@@ -1,10 +1,10 @@
 package com.example.api.todo.service.impl;
 
 import com.example.api.todo.domain.entity.Todo;
-import com.example.api.todo.domain.entity.TodoPartial;
-import com.example.api.todo.domain.request.CreateTodoRequest;
-import com.example.api.todo.domain.request.SkipLimitRequest;
-import com.example.api.todo.domain.response.TodoApiResponse;
+import com.example.api.todo.domain.dto.TodoPartial;
+import com.example.api.todo.domain.dto.request.CreateTodoRequest;
+import com.example.api.todo.domain.dto.request.LimitSkipRequest;
+import com.example.api.todo.domain.dto.response.TodoApiResponse;
 import com.example.api.todo.repository.TodoCustomRepository;
 import com.example.api.todo.repository.TodoRepository;
 import com.example.api.todo.service.TodoService;
@@ -39,7 +39,7 @@ public class TodoServiceImpl implements TodoService {
         if (Objects.isNull(limit)) limit = 10;
         if (Objects.isNull(skip)) skip = 0;
 
-        Pageable pageable = new SkipLimitRequest(limit, skip);
+        Pageable pageable = new LimitSkipRequest(limit, skip);
 
         return todoCustomRepository.findAllByUserId(userId, pageable);
     }

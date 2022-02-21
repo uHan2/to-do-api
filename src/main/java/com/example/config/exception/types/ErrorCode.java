@@ -18,6 +18,9 @@ public enum ErrorCode implements Result{
 	// USER
 	USER_INFO_ERROR("80001", "user.error.msg", "회원 정보를 처리하던 도중에 오류가 발생했습니다"),
 
+	// FILE
+	FILE_UPLOAD_MAX_SIZE_ERROR("70001", "file.error.msg", "업로드 가능한 최대 용량은 2mb 입니다."),
+
 	;
 	private final String code;
 	private final String messageKey;
@@ -41,5 +44,12 @@ public enum ErrorCode implements Result{
 		userInfoError.message = message;
 
 		return userInfoError;
+	}
+
+	public static ErrorCode fileUploadSizeError(String message) {
+		ErrorCode fileUploadError = FILE_UPLOAD_MAX_SIZE_ERROR;
+		fileUploadError.message = message;
+
+		return fileUploadError;
 	}
 }
