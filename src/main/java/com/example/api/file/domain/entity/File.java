@@ -10,6 +10,12 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+/**
+ * File Entity
+ *
+ * @author 이상진
+ * @since 2022.02.21
+ */
 @Entity
 @Getter
 @NoArgsConstructor

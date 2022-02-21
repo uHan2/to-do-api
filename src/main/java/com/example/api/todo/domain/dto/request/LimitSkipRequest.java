@@ -3,6 +3,12 @@ package com.example.api.todo.domain.dto.request;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
+/**
+ * Request Object For Init Limit, Skip Value for Pageable
+ *
+ * @author 이상진
+ * @since 2022.02.21
+ */
 public class LimitSkipRequest implements Pageable {
 
     private final Integer limit;

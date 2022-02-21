@@ -10,6 +10,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+/**
+ * Service Implements About User
+ *
+ * @author 이상진
+ * @since 2022.02.21
+ */
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -18,7 +24,12 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
 
-
+    /**
+     * User Sign In Service Implements Method
+     *
+     * @param userSignInRequest Class For Sign In (It Has Username, password Field)
+     * @return JWT Token
+     */
     @Override
     public String signIn(UserSignInRequest userSignInRequest) {
 

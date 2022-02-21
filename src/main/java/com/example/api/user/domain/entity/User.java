@@ -12,6 +12,12 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
 
+/**
+ * User Entity (implements UserDetails)
+ *
+ * @author 이상진
+ * @since 2022.02.21
+ */
 @Entity
 @Getter
 @Builder
