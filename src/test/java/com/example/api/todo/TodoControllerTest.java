@@ -3,6 +3,7 @@ package com.example.api.todo;
 import com.example.api.todo.domain.dto.request.CreateTodoRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.service.spi.ServiceException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -17,6 +18,10 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import javax.transaction.Transactional;
+import java.util.Objects;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -39,6 +44,22 @@ public class TodoControllerTest {
 
         // then
         mockMvc.perform(getTodo).andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    @WithMockUser
+    void todo_하나_가져오기_테스트_실패() throws Exception {
+        // given
+
+        // when
+        RequestBuilder getTodo = MockMvcRequestBuilders.get("/todos/999");
+
+        // then
+        mockMvc.perform(getTodo)
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(result -> assertTrue(result.getResolvedException() instanceof ServiceException))
+                .andExpect(result -> assertEquals("존재하지 않는 Todo 입니다.", Objects.requireNonNull(
+                        result.getResolvedException()).getMessage()));
     }
 
     @Test
@@ -65,8 +86,19 @@ public class TodoControllerTest {
                 .contentType(MediaType.APPLICATION_JSON);
 
         // then
-        mockMvc.perform(createTodo)
-                .andExpect(MockMvcResultMatchers.status().isOk());
+        mockMvc.perform(createTodo).andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    @WithMockUser
+    void todo_업데이트_테스트_실패() throws Exception {
+        // given
+
+        // when
+        RequestBuilder updateTodo = MockMvcRequestBuilders.put("/todos/3");
+
+        // then
+        mockMvc.perform(updateTodo).andExpect(MockMvcResultMatchers.status().isOk());
     }
 
     @Test
@@ -75,10 +107,14 @@ public class TodoControllerTest {
         // given
 
         // when
-        RequestBuilder updateTodo = MockMvcRequestBuilders.put("/todos/3");
+        RequestBuilder updateTodo = MockMvcRequestBuilders.put("/todos/999");
 
         // then
-        mockMvc.perform(updateTodo).andExpect(MockMvcResultMatchers.status().isOk());
+        mockMvc.perform(updateTodo)
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(result -> assertTrue(result.getResolvedException() instanceof ServiceException))
+                .andExpect(result -> assertEquals("존재하지 않는 Todo 입니다.", Objects.requireNonNull(
+                        result.getResolvedException()).getMessage()));
     }
 
     @Test
@@ -93,10 +129,26 @@ public class TodoControllerTest {
 
         // then
         mockMvc.perform(getTodo).andExpect(MockMvcResultMatchers.status().isOk());
-
         mockMvc.perform(deleteTodo);
-
         mockMvc.perform(getTodo).andExpect(MockMvcResultMatchers.status().is4xxClientError());
+    }
+
+    @Test
+    @Transactional
+    @WithMockUser
+    void todo_삭제_테스트_실패() throws Exception {
+        // given
+
+        // when
+        RequestBuilder deleteTodo = MockMvcRequestBuilders.delete("/todos/999");
+
+        // then
+        mockMvc.perform(deleteTodo)
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(result -> assertTrue(result.getResolvedException() instanceof ServiceException))
+                .andExpect(result -> assertEquals("존재하지 않는 Todo 입니다.", Objects.requireNonNull(
+                        result.getResolvedException()).getMessage()));
+
     }
 
 
