@@ -17,5 +17,4 @@
   - 상단 실행창 Edit Configuration -> TodoApiApplication -> Active Profiles 에 local 입력
 
 ## Test
-
 - File, Todo, User 세 가지의 도메인을 나눠서 구현 (13 Test Case)
