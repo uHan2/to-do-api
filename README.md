@@ -5,7 +5,7 @@
 ### Run
 
 1. 프로젝트를 깃헙을 통해 Download & Open
-2. 프로젝트 실행시 원활환 테스트를 위해 testUser와 testTodo 저장 (In-Memory Hibernate Db) 
+2. 프로젝트를 실행하면 원활환 테스트를 위해 testUser와 testTodo 샘플들이 자동으로 저장 (In-Memory Hibernate Db) 
 3. 먼저 testUser1 또는 testUser2 아이디로 (비밀번호 testPw) 로그인 API 를 실행하면 토큰 획득
 4. 이후 To-do 혹은 File Api를 실행하기 위해서는 Header 에 Key : X-AUTH-TOKEN, Value : 획득한 토큰 을 입력하면 인가받은 채로 API 실행 가능 
 (Token 값이 없거나, 유효하지 않으면 AccessDeniedException 발생)
