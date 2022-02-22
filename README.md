@@ -14,7 +14,7 @@
 
 실제 데이터의 관리를 직접 보기위해서는
 
-1. localhost:8080/h2 에 접속하여 아래의 정보를 기입 (비밀번호는 공란)
+- localhost:8080/h2 에 접속하여 아래의 정보를 기입 (비밀번호는 공란)
 
 ```
 driver-class-name: org.h2.Driver
